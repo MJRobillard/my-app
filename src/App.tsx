@@ -37,11 +37,11 @@ const App: React.FC = () => {
     }
   };
 
-  const fetchMarsPhotos = async (date: string = '', rover: string = 'curiosity') => {
+  const fetchMarsPhotos = async (date: string = '') => {
     try {
       setLoading(true);
       const response = await axios.get<{ photos: MarsPhoto[] }>(
-        `https://api.nasa.gov/mars-photos/api/v1/rovers/${rover}/photos?earth_date=${date}&api_key=${apiKey}`
+        `https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?sol=${date}&camera=fhaz&api_key=${apiKey}`
       );
       setMarsPhotos(response.data.photos);
     } catch (error) {
@@ -102,7 +102,7 @@ const App: React.FC = () => {
       <div>
         <h2>Select a Date for Mars Rover Photos</h2>
         <input
-          type="date"
+          type="number"
           value={marsDate}
           onChange={handleMarsDateChange}
         />
